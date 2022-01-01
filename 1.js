@@ -1,24 +1,34 @@
-let obj = new THREE.DodecahedronGeometry(1, 0);
+const obj = new THREE.DodecahedronGeometry(1, 0);
 //let mat = new THREE.MeshNormalMaterial({wireframe:true});
-let mat = new THREE.MeshStandardMaterial();
-let mesh = new THREE.Mesh(obj,mat);
-
-let g = new THREE.Group();
+let mat = new THREE.MeshStandardMaterial({transparent:true, opacity:1});
+let mesh = new THREE.InstancedMesh(obj,mat, 10000);
+mesh.castShadow = true;
+mesh.receiveShadow= true;
+this.add(mesh);
+//let temp = new THREE.Object3D();
 for ( var i = 0; i < 10000; i ++ ) {
+	
+	
 
-	var d = mesh.clone();
+	let temp = new THREE.Object3D();
 	
 let x = Math.random() * 10;
 let y = Math.random() * 10;
 let z = Math.random() * 10;
+	temp.position.set(x,y,z);
+	temp.updateMatrix(); 
+	mesh.setMatrixAt(i, temp.matrix);
+	
+	
+	
 
-d.position.set(x,y,z);
-	g.add(d);
+
+	
 	
 
 
 }
-this.add(g);
+//this.add(g);
 
 
 function update( event ) {
