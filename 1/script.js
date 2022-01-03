@@ -1,4 +1,4 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.module.js'
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.126.0/build/three.module.js'
 
 let scene, camera, renderer
 
@@ -7,28 +7,29 @@ create()
 animate()
 
 function create() {
-  const obj = new THREE.DodecahedronGeometry(2, 0);
-//let mat = new THREE.MeshNormalMaterial({wireframe:true});
-const mat = new THREE.MeshStandardMaterial({flatShading:true, opacity:1});
-const mesh = new THREE.InstancedMesh(obj,mat, 10000);
-mesh.castShadow = true;
-mesh.receiveShadow = true;
-scene.add(mesh);
-//let temp = new THREE.Object3D();
-for ( let i = 0; i < 10000; i ++ ) {
 
-  const temp = new THREE.Object3D();
+  const obj = new THREE.DodecahedronGeometry(1, 0)
+  //let mat = new THREE.MeshNormalMaterial({wireframe:true});
+  const mat = new THREE.MeshStandardMaterial( { flatShading:true, opacity:1 } )
+  const mesh = new THREE.InstancedMesh(obj,mat, 10000)
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  scene.add(mesh);
+  //let temp = new THREE.Object3D();
+  for ( let i = 0; i < 10000; i ++ ) {
 
-  const x = getRandomArbitrary(-10,10);
-  const y = getRandomArbitrary(-10,10);
-  const z = getRandomArbitrary(-10,10);
-  temp.position.set(x,y,z);
-  //temp.rotation.set(x,0,0);
+    const temp = new THREE.Object3D();
 
-  temp.updateMatrix(); 
-  mesh.setMatrixAt( i, temp.matrix );
+    const x = getRandomArbitrary(-10,10);
+    const y = getRandomArbitrary(-10,10);
+    const z = getRandomArbitrary(-1,1);
+    temp.position.set(x,y,z);
+    //temp.rotation.set(x,0,0);
 
-}
+    temp.updateMatrix(); 
+    mesh.setMatrixAt( i, temp.matrix );
+
+  }
 
 }
 
@@ -44,19 +45,20 @@ function init() {
   //scene
 
   scene = new THREE.Scene()
-  scene.background = new THREE.Color( 1,1,1 )
+  //scene.background = new THREE.Color( 1,1,1 )
 
   //camera
   
-  camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 1000 )
-  camera.position.z = 50
-
+  camera = new THREE.PerspectiveCamera( 50, window.innerWidth/window.innerHeight, 1, 1000 )
+  camera.position.z = 20
+  
   //lights
-  dLight = new THREE.DirectionalLight()
-  scene.add( dLight )
+  const light = new THREE.DirectionalLight()
+  light.position.set( 5, 10, 7.5 )
+  scene.add( light )
 
-  aLight = new THREE.AmbientLight()
-  scene.add( aLight )
+  const hemiLight = new THREE.HemisphereLight( 0x33b9ef, 0xad33ef, 1 )
+  scene.add( hemiLight )
 
   window.addEventListener( 'resize', onWindowResize, false )
 
@@ -72,10 +74,6 @@ function onWindowResize() {
   camera.updateProjectionMatrix()
   renderer.setSize( window.innerWidth, window.innerHeight )
   animate()
-}
-
-function update( event ) {
-//mesh.rotation.y += 0.001;
 }
 
 function getRandomArbitrary(min, max) {
