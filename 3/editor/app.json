@@ -1,0 +1,194 @@
+{
+	"metadata": {
+		"type": "App"
+	},
+	"project": {
+		"shadows": true,
+		"shadowType": 1,
+		"vr": false,
+		"physicallyCorrectLights": true,
+		"toneMapping": 4,
+		"toneMappingExposure": 1
+	},
+	"camera": {
+		"metadata": {
+			"version": 4.5,
+			"type": "Object",
+			"generator": "Object3D.toJSON"
+		},
+		"object": {
+			"uuid": "105B8417-E139-4A6C-A0E2-C3CAE5874D0F",
+			"type": "PerspectiveCamera",
+			"name": "Camera",
+			"layers": 1,
+			"matrix": [0.9999932777853091,-0.0032075253908088537,0.0017765598950894403,0,0.003207520329012998,0.9999948558772026,0.000005698390285011466,0,-0.001776569033978709,-4.235164736271502e-22,0.9999984218999886,0,0,2,1,1],
+			"fov": 30,
+			"zoom": 1,
+			"near": 0.01,
+			"far": 1000,
+			"focus": 10,
+			"aspect": 0.9383886255924171,
+			"filmGauge": 35,
+			"filmOffset": 0
+		}
+	},
+	"scene": {
+		"metadata": {
+			"version": 4.5,
+			"type": "Object",
+			"generator": "Object3D.toJSON"
+		},
+		"geometries": [
+			{
+				"uuid": "7B6B2BAD-4545-4751-A7C2-8A63C3BBF0B6",
+				"type": "DodecahedronGeometry",
+				"radius": 2,
+				"detail": 2
+			}],
+		"materials": [
+			{
+				"uuid": "25F16835-DF29-41E0-AF83-4F576F74145B",
+				"type": "MeshStandardMaterial",
+				"color": 16777215,
+				"roughness": 0.58,
+				"metalness": 0.5,
+				"emissive": 0,
+				"envMapIntensity": 1,
+				"refractionRatio": 0.98,
+				"depthFunc": 3,
+				"depthTest": true,
+				"depthWrite": true,
+				"colorWrite": true,
+				"stencilWrite": false,
+				"stencilWriteMask": 255,
+				"stencilFunc": 519,
+				"stencilRef": 0,
+				"stencilFuncMask": 255,
+				"stencilFail": 7680,
+				"stencilZFail": 7680,
+				"stencilZPass": 7680,
+				"flatShading": true
+			}],
+		"textures": [
+			{
+				"uuid": "652BE888-CE40-4E56-8906-9379000D09BA",
+				"name": "PMREM.cubeUv",
+				"mapping": 306,
+				"repeat": [1,1],
+				"offset": [0,0],
+				"center": [0,0],
+				"rotation": 0,
+				"wrap": [1001,1001],
+				"format": 1023,
+				"type": 1016,
+				"encoding": 3000,
+				"minFilter": 1006,
+				"magFilter": 1006,
+				"anisotropy": 1,
+				"flipY": true,
+				"premultiplyAlpha": false,
+				"unpackAlignment": 4
+			}],
+		"object": {
+			"uuid": "5FC9ACA9-2A93-474D-AA32-FACC76551914",
+			"type": "Scene",
+			"name": "Scene",
+			"layers": 1,
+			"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+			"environment": "652BE888-CE40-4E56-8906-9379000D09BA",
+			"children": [
+				{
+					"uuid": "2BB13F1F-B448-4A0E-9793-2438F56F595E",
+					"type": "Mesh",
+					"name": "Dodecahedron",
+					"castShadow": true,
+					"receiveShadow": true,
+					"layers": 1,
+					"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+					"geometry": "7B6B2BAD-4545-4751-A7C2-8A63C3BBF0B6",
+					"material": "25F16835-DF29-41E0-AF83-4F576F74145B"
+				},
+				{
+					"uuid": "76428646-119B-4BB1-86AA-12ABAE5C6781",
+					"type": "DirectionalLight",
+					"name": "DirectionalLight",
+					"castShadow": true,
+					"layers": 1,
+					"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,10,10,10,1],
+					"color": 16777215,
+					"intensity": 0.6,
+					"shadow": {
+						"radius": 0.5,
+						"camera": {
+							"uuid": "3BA33458-8FA7-43AA-85D7-BAF3EE6FE823",
+							"type": "OrthographicCamera",
+							"layers": 1,
+							"zoom": 1,
+							"left": -5,
+							"right": 5,
+							"top": 5,
+							"bottom": -5,
+							"near": 0.5,
+							"far": 500
+						}
+					}
+				},
+				{
+					"uuid": "EF8D692D-DC4A-410B-A25A-9FE2EC94A626",
+					"type": "HemisphereLight",
+					"name": "HemisphereLight",
+					"visible": false,
+					"layers": 1,
+					"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,10,0,1],
+					"color": 16745989,
+					"intensity": 0.3,
+					"groundColor": 16763667
+				},
+				{
+					"uuid": "59A762C3-A998-40E3-8CE4-D7BCAF87110D",
+					"type": "DirectionalLight",
+					"name": "DirectionalLight",
+					"castShadow": true,
+					"layers": 1,
+					"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,5,1,0,1],
+					"color": 2204126,
+					"intensity": 0.5,
+					"shadow": {
+						"camera": {
+							"uuid": "77C569A6-6BC0-4D78-8DAA-2B0ABAB89B45",
+							"type": "OrthographicCamera",
+							"layers": 1,
+							"zoom": 1,
+							"left": -5,
+							"right": 5,
+							"top": 5,
+							"bottom": -5,
+							"near": 0.5,
+							"far": 500
+						}
+					}
+				},
+				{
+					"uuid": "61E99622-97C6-49ED-AD16-8C370216DB8B",
+					"type": "AmbientLight",
+					"name": "AmbientLight",
+					"layers": 1,
+					"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+					"color": 5972071,
+					"intensity": 0.2
+				}]
+		}
+	},
+	"scripts": {
+		"2BB13F1F-B448-4A0E-9793-2438F56F595E": [
+			{
+				"name": "rot",
+				"source": "const cnt = 10000\nconst obj = new THREE.TetrahedronGeometry(0.1, 3);\n\t\t\t\t\t\t\t\t\t\t\nconst mat = new THREE.MeshStandardMaterial({flatShading:true, roughness:0.5, metalness: 0.5});\nconst mesh = new THREE.InstancedMesh(obj,mat, cnt);\nmesh.castShadow = true;\nmesh.receiveShadow = true;\nthis.add(mesh);\n\nfor ( let i = 0; i < cnt; i ++ ) {\n\n  const temp = new THREE.Object3D(); \n\tconst d = getRandomArbitrary(1.5, 1.95); const rY = getRandomArbitrary(0, 2);\n\t\n\t\n\nconst pt = randomSpherePoint(0,0,0,d)\n  temp.position.set(pt[0], pt[1], pt[2]); \n\n  temp.rotation.set(rY * Math.PI,0,0);\n\n  temp.updateMatrix(); \n  mesh.setMatrixAt( i, temp.matrix );\n\n}\n\nfunction getRandomArbitrary(min, max) {\n    return Math.random() * (max - min) + min;\n}\n\n//src: https://stackoverflow.com/a/15048260/2179399\nfunction randomSpherePoint(x0,y0,z0,radius){\n   var u = Math.random();\n   var v = Math.random();\n   var theta = 2 * Math.PI * u;\n   var phi = Math.acos(2 * v - 1);\n   var x = x0 + (radius * Math.sin(phi) * Math.cos(theta));\n   var y = y0 + (radius * Math.sin(phi) * Math.sin(theta));\n   var z = z0 + (radius * Math.cos(phi));\n   return [x,y,z];\n}\n\n\nfunction update( event ) {\n\nthis.rotation.x += 0.001;this.rotation.y += 0.0001;\n\t\n}"
+			}],
+		"5FC9ACA9-2A93-474D-AA32-FACC76551914": [
+			{
+				"name": "doit",
+				"source": "const cnt = 1000\nconst obj = new THREE.DodecahedronGeometry(0.1, 0);\nconst mat = new THREE.MeshStandardMaterial({flatShading:true, opacity:1});\nconst mesh = new THREE.InstancedMesh(obj,mat, cnt);\nmesh.castShadow = true;\nmesh.receiveShadow = true;\nscene.add(mesh);\n\nfor ( let i = 0; i < cnt; i ++ ) {\n\n  const temp = new THREE.Object3D();\n\n  const x = getRandomArbitrary(-100,100);\n  const y = getRandomArbitrary(-100,100);\n  const z = getRandomArbitrary(-100,100);\n  temp.position.set(x,y,z);\n  //temp.rotation.set(x,0,0);\n\n  temp.updateMatrix(); \n  mesh.setMatrixAt( i, temp.matrix );\n\n}\n\nfunction getRandomArbitrary(min, max) {\n    return Math.random() * (max - min) + min;\n}\n\n\nfunction update( event ) {\nmesh.rotation.x += 0.0001;\n}"
+			}]
+	}
+}
