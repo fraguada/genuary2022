@@ -1,0 +1,57 @@
+{
+	"metadata": {
+		"type": "App"
+	},
+	"project": {
+		"shadows": true,
+		"shadowType": 1,
+		"vr": false,
+		"physicallyCorrectLights": false,
+		"toneMapping": 0,
+		"toneMappingExposure": 1
+	},
+	"camera": {
+		"metadata": {
+			"version": 4.5,
+			"type": "Object",
+			"generator": "Object3D.toJSON"
+		},
+		"object": {
+			"uuid": "E0DD3CB9-3678-4D4D-ABCF-7F42B71D07D3",
+			"type": "PerspectiveCamera",
+			"name": "Camera",
+			"layers": 1,
+			"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,50,50,80,1],
+			"fov": 53.84,
+			"zoom": 1,
+			"near": 0.01,
+			"far": 1000,
+			"focus": 10,
+			"aspect": 0.9383886255924171,
+			"filmGauge": 35,
+			"filmOffset": 0
+		}
+	},
+	"scene": {
+		"metadata": {
+			"version": 4.5,
+			"type": "Object",
+			"generator": "Object3D.toJSON"
+		},
+		"object": {
+			"uuid": "5FC9ACA9-2A93-474D-AA32-FACC76551914",
+			"type": "Scene",
+			"name": "Scene",
+			"layers": 1,
+			"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+			"background": 16777215
+		}
+	},
+	"scripts": {
+		"5FC9ACA9-2A93-474D-AA32-FACC76551914": [
+			{
+				"name": "doit",
+				"source": "const divs = 50;\nconst length = 100;\nconst unit = length / divs;\n\nconst crvs = 15;\nconst spread = 5;\nconst offset = 80;\n\n\nconst lineA = genPoly();\nconst lineB = genPoly( true );\n//this.add( lineA ); \n//this.add( lineB ); \nconst lines = cxn( lineA, lineB );\n\nfor ( let j = 0; j < crvs; j ++ ) { \n\t\n\tconst pts = [];\n\t\n\t\n\t\n\t\n\nfor ( let i = 0; i < lines.length; i ++ ) { \n\t//this.add(lines[i]); \n\tconst positions = lines[i].geometry.attributes.position.array; \n\tconst u = positions[ j * 3 ];\n\tconst v = positions[ (j * 3) + 1 ];\n\tconst pt = new THREE.Vector3(u,v,0); \n\tpts.push(pt);\n\t\n\t\n\n}\n\t\n\tconst g = new THREE.BufferGeometry().setFromPoints( pts );\n\t let c = new THREE.Color( 0, 0, 0 );\t\n\tconst c1 = new THREE.Color( 1, 1, 1 );\n\t\n\t//let c = null;\n\t\n\t\n\t\n\t\n\tif(j > 0 ){ \n\t\t\n\t\tconst val = j/crvs\n\t\t\n\t\t\n\t\t\n\t\tc = new THREE.Color( 1, val, 1);\n\t\t\n\t\t\n\t\n\t}\n\t//const m = new THREE.LineBasicMaterial( {color: c ,linewidth: 5,linejoin:  'round'}); \n\n\tconst m = new THREE.LineBasicMaterial( {\n\tcolor: c,\n\tlinewidth: 5,\n\tlinecap: 'round', //ignored by WebGLRenderer\n\tlinejoin:  'round' //ignored by WebGLRenderer\n} );\n\tconst l = new THREE.Line( g, m ); \n\tthis.add(l);\n\t\n\t\n\t\n}\n\nfunction cxn( lineA, lineB ) { \n\t\n\t\n\t\n const lines= [];\n\tconst positionsA = lineA.geometry.attributes.position.array;\n\tconst positionsB = lineB.geometry.attributes.position.array;\n\tfor ( let i = 0; i < divs; i ++ ) {\n\t //const pts = []; \n\t\tconst u1 = positionsA[ i * 3 ];\n\t\tconst u2 = positionsB[ i * 3 ];\n\t\t\n\t\t\n\t\tconst v1 = positionsA[ (i * 3) + 1 ];\n\t\tconst v2 = positionsB[ (i * 3) + 1 ];\n\t\tconst ptA = new THREE.Vector3( u1, v1, 0 );\n\t\t\n\t\tconst ptB = new THREE.Vector3( u2, v2, 0 );\n\t\t\n\t\t//const g = new THREE.BufferGeometry().setFromPoints( pts);\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \n\t\t\nconst lc = new THREE.LineCurve3(ptA, ptB);\n\t\tconst pts  = lc.getPoints( crvs );\n\t\t\n\t\t\n\t\tconst g = new THREE.BufferGeometry().setFromPoints( pts );\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\tconst line = new THREE.Line( g, material ); \n\t\tlines.push(line);\n\t\n\t} return lines;\n}\n\nfunction genPoly( isRandom ) { \n\t\n\tconst points = []; \n\tfor ( let i = 0; i < divs; i ++ ) {\n\t\t\n\t    let u = i * unit; \n\t\tlet v = 0; \n\t\t\n\t\tif ( isRandom ) { \n\t\t\tv = offset + getRandomArbitrary(0, spread); \n\t\t\t//u += getRandomArbitrary(-15, 15);\n\t\t\n\t\t} \n\t\t\n\t\tpoints.push( new THREE.Vector3( u, v, 0 ) );\n\t\t\n\t\t\n\t\t\n\t\t\n\t\t\n\t}\n\t\n\tconst geometry = new THREE.BufferGeometry().setFromPoints( points );\n\tconst line = new THREE.Line( geometry, material ); \n\treturn line;\n\t\n}\n\nfunction update( event ) {}\n\nfunction getRandomArbitrary(min, max) {\n    return Math.random() * (max - min) + min;\n}"
+			}]
+	}
+}

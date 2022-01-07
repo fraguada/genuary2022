@@ -1,0 +1,56 @@
+{
+	"metadata": {
+		"type": "App"
+	},
+	"project": {
+		"shadows": true,
+		"shadowType": 1,
+		"vr": false,
+		"physicallyCorrectLights": false,
+		"toneMapping": 0,
+		"toneMappingExposure": 1
+	},
+	"camera": {
+		"metadata": {
+			"version": 4.5,
+			"type": "Object",
+			"generator": "Object3D.toJSON"
+		},
+		"object": {
+			"uuid": "04DA1C13-DBCF-4734-8AD1-0622C90C1D59",
+			"type": "PerspectiveCamera",
+			"name": "Camera",
+			"layers": 1,
+			"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,5,1],
+			"fov": 50,
+			"zoom": 1,
+			"near": 0.01,
+			"far": 1000,
+			"focus": 10,
+			"aspect": 0.9383886255924171,
+			"filmGauge": 35,
+			"filmOffset": 0
+		}
+	},
+	"scene": {
+		"metadata": {
+			"version": 4.5,
+			"type": "Object",
+			"generator": "Object3D.toJSON"
+		},
+		"object": {
+			"uuid": "5FC9ACA9-2A93-474D-AA32-FACC76551914",
+			"type": "Scene",
+			"name": "Scene",
+			"layers": 1,
+			"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+		}
+	},
+	"scripts": {
+		"5FC9ACA9-2A93-474D-AA32-FACC76551914": [
+			{
+				"name": "doit",
+				"source": "/*const material = new THREE.LineBasicMaterial({\n\tcolor: 0xffffff\n});*/\n\nconst material = new THREE.LineDashedMaterial( {\n\tcolor: 0xffffff,\n\tlinewidth: 1,\n\tscale: 1,\n\tdashSize: 3,\n\tgapSize: 3,\n} );\n\nconst squares = [];\nconst max = 65;\n\nconst spread = 0.65;\n\n\n//this.add( line );\n\n\nfunction update( event ) { \n\t\n\t\n\t\n\tthis.add( genSquare() ); \n\tif(this.children.length> max){\n\t this.children.shift();\n\t}\n\t\n\t\n\t\n\t\n\n}\n\nfunction genSquare() {\n\t\n\t\nconst points = []; \n\tconst a1 = getRandomArbitrary(-1 - spread, -1 + spread);\n\tconst b1 = getRandomArbitrary(1 - spread, 1 + spread);\n\t\n\tconst a2 = getRandomArbitrary(1 - spread, 1 + spread);\n\tconst b2 = getRandomArbitrary(1 - spread, 1 + spread);\n\t\n\tconst a3 = getRandomArbitrary(1 - spread, 1 + spread);\n\tconst b3 = getRandomArbitrary(-1 - spread, -1 + spread);\n\t\n\tconst a4 = getRandomArbitrary(-1 - spread, -1 + spread);\n\tconst b4 = getRandomArbitrary(-1 - spread, -1 + spread);\n\t\n\t\npoints.push( new THREE.Vector3( a1, b1, 0 ) );\npoints.push( new THREE.Vector3( a2, b2, 0 ) );\npoints.push( new THREE.Vector3( a3, b3, 0 ) );\npoints.push( new THREE.Vector3( a4, b4, 0 ) );\npoints.push( new THREE.Vector3( a1, b1, 0 ) );\n\nconst geometry = new THREE.BufferGeometry().setFromPoints( points );\n\nconst line = new THREE.Line( geometry, material ); \n\treturn line;\n\t\n\t\n\n\n}\n\nfunction getRandomArbitrary(min, max) {\n    return Math.random() * (max - min) + min;\n}\n"
+			}]
+	}
+}
