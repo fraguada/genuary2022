@@ -1,0 +1,57 @@
+{
+	"metadata": {
+		"type": "App"
+	},
+	"project": {
+		"shadows": true,
+		"shadowType": 1,
+		"vr": false,
+		"physicallyCorrectLights": false,
+		"toneMapping": 0,
+		"toneMappingExposure": 1
+	},
+	"camera": {
+		"metadata": {
+			"version": 4.5,
+			"type": "Object",
+			"generator": "Object3D.toJSON"
+		},
+		"object": {
+			"uuid": "E9C8108F-BC53-4066-8F77-E651A38BB2CB",
+			"type": "PerspectiveCamera",
+			"name": "Camera",
+			"layers": 1,
+			"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,300.00000000000006,1],
+			"fov": 50,
+			"zoom": 1,
+			"near": 0.01,
+			"far": 1000,
+			"focus": 10,
+			"aspect": 0.9383886255924171,
+			"filmGauge": 35,
+			"filmOffset": 0
+		}
+	},
+	"scene": {
+		"metadata": {
+			"version": 4.5,
+			"type": "Object",
+			"generator": "Object3D.toJSON"
+		},
+		"object": {
+			"uuid": "5FC9ACA9-2A93-474D-AA32-FACC76551914",
+			"type": "Scene",
+			"name": "Scene",
+			"layers": 1,
+			"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+			"background": 16777215
+		}
+	},
+	"scripts": {
+		"5FC9ACA9-2A93-474D-AA32-FACC76551914": [
+			{
+				"name": "doit",
+				"source": "\nconst maxPts =10;\nconst spread =100;\n\nconst points = [];\n\nlet index = 0;\n\nconst material = new THREE.LineBasicMaterial( { color: 0x000000 } );\nfunction update( event ) { \n\t\n\t\n\t\n\t\n\tconst x = getRandomArbitrary( - spread, spread); \n\tconst y = getRandomArbitrary( - spread, spread); \n\tconst v = new THREE.Vector3(x, y, 0); \n\tpoints.push(v);index++;\n\t\n\t\n  if( points.length > 1 ) {\n\t  for (let i = 0; i < points.length-1; i ++ ){\n\t   const pts = [points[i],v];\n\t\t\n\t\t  \n\t\t  \n\t\t  const geometry = new THREE.BufferGeometry().setFromPoints( pts );\n\t\t\n\t\t  \n\t\t  const line = new THREE.Line( geometry, material );\n\t\t  line.userData.index = index;\n\t\t  //line.name = index\n\t\t  this.add(line);\n\t\t  //line.userData.ids = [i,points.length+1];\n\t\t  \n\t  }\n  }\n\t  \n\t  if (points.length > maxPts) {\n\t\t  points.shift();\n\t\t  //this.background = new THREE.Color( 0xff0000 );\n\t  this.traverse(child => {\n        if (child.userData.index < Math.abs(index - maxPts)) {\n\t\t\t\n\t\t\t//this.background = new THREE.Color( 0xff00ff );\n            this.remove(child);\n        }\n    });\n\t  }\n\t  \n\t  \n  \n  \n \n\t\n\t\n\t\n}\n\nfunction getRandomArbitrary(min, max) {\n    return Math.random() * (max - min) + min;\n}"
+			}]
+	}
+}
