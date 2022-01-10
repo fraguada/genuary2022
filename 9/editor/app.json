@@ -1,0 +1,83 @@
+{
+	"metadata": {
+		"type": "App"
+	},
+	"project": {
+		"shadows": true,
+		"shadowType": 2,
+		"vr": false,
+		"physicallyCorrectLights": false,
+		"toneMapping": 4,
+		"toneMappingExposure": 1
+	},
+	"camera": {
+		"metadata": {
+			"version": 4.5,
+			"type": "Object",
+			"generator": "Object3D.toJSON"
+		},
+		"object": {
+			"uuid": "24823D31-E26E-4CCE-AA1B-76A676DBE651",
+			"type": "PerspectiveCamera",
+			"name": "Camera",
+			"layers": 1,
+			"matrix": [0.8773427394332411,-3.469446951953614e-18,0.47986426993867326,0,-0.04502667276379406,0.9955880356727641,0.08232291275864276,0,-0.47774712589778884,-0.09383210125135698,0.8734719345641025,0,-6.86552349841296,3.547050195445945,12.857201392168667,1],
+			"fov": 50,
+			"zoom": 1,
+			"near": 0.01,
+			"far": 1000,
+			"focus": 10,
+			"aspect": 0.9383886255924171,
+			"filmGauge": 35,
+			"filmOffset": 0
+		}
+	},
+	"scene": {
+		"metadata": {
+			"version": 4.5,
+			"type": "Object",
+			"generator": "Object3D.toJSON"
+		},
+		"textures": [
+			{
+				"uuid": "B3BD9E17-2773-473F-BE4B-6ACC9189CBE1",
+				"name": "PMREM.cubeUv",
+				"mapping": 306,
+				"repeat": [1,1],
+				"offset": [0,0],
+				"center": [0,0],
+				"rotation": 0,
+				"wrap": [1001,1001],
+				"format": 1023,
+				"type": 1016,
+				"encoding": 3000,
+				"minFilter": 1006,
+				"magFilter": 1006,
+				"anisotropy": 1,
+				"flipY": true,
+				"premultiplyAlpha": false,
+				"unpackAlignment": 4
+			}],
+		"object": {
+			"uuid": "5FC9ACA9-2A93-474D-AA32-FACC76551914",
+			"type": "Scene",
+			"name": "Scene",
+			"layers": 1,
+			"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+			"background": 2204126,
+			"environment": "B3BD9E17-2773-473F-BE4B-6ACC9189CBE1",
+			"fog": {
+				"type": "FogExp2",
+				"color": 11184810,
+				"density": 0.05
+			}
+		}
+	},
+	"scripts": {
+		"5FC9ACA9-2A93-474D-AA32-FACC76551914": [
+			{
+				"name": "arch",
+				"source": "const material = new THREE.MeshNormalMaterial( { flatShading:true } );\n\nconst wFloor = 5;\nconst hFloor = 0.1;\nconst dFloor = 4;\nconst nFloor = 10;\nconst f2f = 1;\n\nconst wColumn = 0.1;\nlet hColumn = f2f;\nconst nColumn = 5;\nlet w_c2c = wFloor / nColumn;\nlet d_c2c = dFloor / nColumn;\n\nlet tColumn = (nColumn) * (nColumn) * (nFloor-1);\n\nconst gFloor = new THREE.BoxGeometry( wFloor, hFloor, dFloor, 1,1,1);\nconst floors = new THREE.InstancedMesh(gFloor, material, nFloor );\nfloors.castShadow = true;\n//floors.receiveShadow = true;\nthis.add(floors);\n\nfor ( let i = 0; i < nFloor; i ++ ) {\n\tconst temp = new THREE.Object3D();\n    temp.position.set(0,i*f2f,0);\n    temp.updateMatrix(); \n    floors.setMatrixAt( i, temp.matrix );\n\n}\n\n\n\n\nconst gColumn = new THREE.BoxGeometry(wColumn, hColumn, wColumn, 1,1,1);\nconst columns = new THREE.InstancedMesh(gColumn, material,tColumn);\n//columns.position.set(2.5,f2f/2,2.5);\ncolumns.castShadow = true;\ncolumns.receiveShadow = true;\nthis.add(columns);\nlet index = 0;\nfor( let i = 0; i < nFloor; i ++ ) {\nfor( let j = 0; j < nColumn; j ++ ) {\nfor( let p = 0; p < nColumn; p ++ ) { \n\tconst x = j * (w_c2c);\n\tconst y = i*(f2f);\n\tconst z = p * (d_c2c);\n\t\n\t\n\tconst temp = new THREE.Object3D();\n    temp.position.set(x,y,z);\n    temp.updateMatrix(); \n\tcolumns.setMatrixAt( index, temp.matrix); \n\tindex++;\n\t\n\n}\n}\n}\n\ncolumns.translateX(-wFloor/2 + (w_c2c/2));\ncolumns.translateY(hColumn/2);\ncolumns.translateZ(-dFloor/2 + (d_c2c/2));\n\nconst gLanding = new THREE.BoxGeometry(1, hFloor, 1,1,1,1)\nconst landing = new THREE.Mesh(gLanding, material);\n\nfunction update( event ) {\n//floors.rotation.y += 0.001;\n\tthis.rotation.y += 0.001;\n\t\n\t \n\t\n}"
+			}]
+	}
+}

@@ -1,0 +1,56 @@
+{
+	"metadata": {
+		"type": "App"
+	},
+	"project": {
+		"shadows": true,
+		"shadowType": 1,
+		"vr": false,
+		"physicallyCorrectLights": false,
+		"toneMapping": 0,
+		"toneMappingExposure": 1
+	},
+	"camera": {
+		"metadata": {
+			"version": 4.5,
+			"type": "Object",
+			"generator": "Object3D.toJSON"
+		},
+		"object": {
+			"uuid": "CF48C3FE-2AD1-478B-AE5A-13038D2561CE",
+			"type": "PerspectiveCamera",
+			"name": "Camera",
+			"layers": 1,
+			"matrix": [1,0,0,0,0,0.9999999999999999,0,0,0,0,0.9999999999999999,0,20,-15,30,1],
+			"fov": 50,
+			"zoom": 1,
+			"near": 0.01,
+			"far": 1000,
+			"focus": 10,
+			"aspect": 0.9383886255924171,
+			"filmGauge": 35,
+			"filmOffset": 0
+		}
+	},
+	"scene": {
+		"metadata": {
+			"version": 4.5,
+			"type": "Object",
+			"generator": "Object3D.toJSON"
+		},
+		"object": {
+			"uuid": "5FC9ACA9-2A93-474D-AA32-FACC76551914",
+			"type": "Scene",
+			"name": "Scene",
+			"layers": 1,
+			"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+		}
+	},
+	"scripts": {
+		"5FC9ACA9-2A93-474D-AA32-FACC76551914": [
+			{
+				"name": "sin",
+				"source": "// y=A*sin(Bx+C)+D\n\nconst amplitude = 2;\nconst period = ( 2 * Math.PI ) / 2;\nconst phase = 0;\nconst vertical = 0;\n\nconst tX = 0.6;\nconst tY = 1;\nconst num = 50;\n\nlet x = 0;\nlet y = 0;\nlet z = 0;\n\n\n\nconst material = new THREE.LineBasicMaterial( {\n\tcolor: 0xffffff\n} );\n\nlet points = [];\n\nfunction update( event ) { \n\t\n\t\n\t\tthis.children = [];\n\t\n\t\n\tx += 0.1;\n\ty = ( amplitude * Math.sin( ( period * x ) + phase ) ) + vertical; \n\tconst pt = new THREE.Vector3( x, y, z ); \n\tpoints.push( pt ); \n\tconst geometry = new THREE.BufferGeometry().setFromPoints( points );\n\tconst line = new THREE.Line( geometry, material );\n\t\n\tthis.add( line ); \n\tfor ( let i = 0; i < num; i ++ ) { \n\t\tconst c = line.clone(); \n\t\tc.translateY( -tY * i ); \n\t\tc.translateX( -tX * i );\n\t\tthis.add( c );\n\t\t\n\t\t\n\t\t\n\t\n\t}\n\t\n\t\n\n}"
+			}]
+	}
+}
