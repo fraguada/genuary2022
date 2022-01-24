@@ -1,9 +1,6 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.126.0/build/three.module.js'
-import { ToonShaderDotted, ToonShaderHatching } from 'https://cdn.jsdelivr.net/npm/three@0.126.0/examples/jsm/shaders/ToonShader.js'
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.126.0/examples/jsm/controls/OrbitControls.js'
-
-let val, collect, canvas, ctx, x, y
+let val, val2, collect, collect2, canvas, ctx, x, y
 const rect = 10
+const half = window.innerWidth / 2
 
 document.onpointerdown = (event) => {
   window.open(canvas.toDataURL("image/png"), '_blank')
@@ -15,25 +12,24 @@ animate()
 
 function init() {
 
-  x = y = 0
-
   canvas = document.createElement('canvas')
   document.body.appendChild( canvas )
   ctx = canvas.getContext('2d')
   ctx.canvas.width  = window.innerWidth
   ctx.canvas.height = window.innerHeight
 
-  console.log( canvas )
+  //set vars
   val = getRnd()
-  collect = 1
+  val2 = getRndInt()
+  collect = collect2 = 1
+  x = y = 0
 
 }
-
-
 
 function animate () {
   requestAnimationFrame( animate )
   
+  //My.random()
   if ( val === getRnd() ) {
     collect ++
   } else {
@@ -51,8 +47,27 @@ function animate () {
   ctx.fillStyle = "rgba("+r+","+g+","+b+","+a+")"
   ctx.fillRect( x, y, rect, rect )
 
+  //Math.random()
+  if ( val2 === getRndInt() ) {
+    collect2 ++
+  } else {
+    val2 = getRndInt()
+    collect2 = 0
+  }
+
+  const r2 = 255 / ( collect2 + 1 )
+  const g2 = 0
+  let a2 = r2 / 255
+  let b2 = r2
+
+  ctx.fillStyle = "rgba("+255+","+255+","+255+","+255+")"
+  ctx.fillRect( x + half, y, rect, rect )
+  ctx.fillStyle = "rgba("+r2+","+g2+","+b2+","+a2+")"
+  ctx.fillRect( x + half, y, rect, rect )
+
+  //move cursor
   x += rect
-  if ( x >= canvas.width ) {
+  if ( x >= canvas.width / 2 ) {
     y += rect
     x = 0
   }
@@ -61,16 +76,18 @@ function animate () {
     y = 0
   }
 
-  //console.log( collect )
-
-}
-  
-
-
-function onWindowResize() {
-  animate()
 }
 
 function getRnd() {
   return Date.now() % 2
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min) + min) //The maximum is exclusive and the minimum is inclusive
+}
+
+function getRndInt() {
+  return getRandomInt(0, 10) % 2
 }
